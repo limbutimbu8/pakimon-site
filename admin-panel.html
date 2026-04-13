@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Contact Messages</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f8;
+            color: #1f2933;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: 28px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        button {
+            border: none;
+            border-radius: 8px;
+            padding: 12px 16px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .refresh-btn {
+            background: #2563eb;
+            color: #fff;
+        }
+
+        .clear-btn {
+            background: #dc2626;
+            color: #fff;
+        }
+
+        .empty-state {
+            background: #fff;
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            color: #52606d;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+        }
+
+        .message-list {
+            display: grid;
+            gap: 16px;
+        }
+
+        .message-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+        }
+
+        .message-card h2 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .meta {
+            color: #52606d;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .body {
+            background: #f8fafc;
+            border-left: 4px solid #4CAF50;
+            border-radius: 8px;
+            padding: 14px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Contact Messages</h1>
+            <div class="actions">
+                <button type="button" class="refresh-btn" id="refreshBtn">Refresh</button>
+                <button type="button" class="clear-btn" id="clearBtn">Clear All</button>
+            </div>
+        </div>
+
+        <div id="messagesContainer"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./supabase-config.js"></script>
+    <script>
+        const supabaseClient = window.supabase.createClient(window.SUPABASE_CONFIG.url, window.SUPABASE_CONFIG.anonKey);
+        const messagesContainer = document.getElementById('messagesContainer');
+
+        async function getMessages() {
+            const { data, error } = await supabaseClient
+                .from('contact_messages')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                console.error(error);
+                return [];
+            }
+
+            return data || [];
+        }
+
+        async function renderMessages() {
+            const messages = await getMessages();
+
+            if (!messages.length) {
+                messagesContainer.innerHTML = '<div class="empty-state">No messages yet. New contact messages will appear here.</div>';
+                return;
+            }
+
+            messagesContainer.innerHTML = '<div class="message-list">' + messages.map(function(item) {
+                return `
+                    <div class="message-card">
+                        <h2>${escapeHtml(item.username)}</h2>
+                        <div class="meta">Received: ${escapeHtml(new Date(item.created_at).toLocaleString())}</div>
+                        <div class="body">${escapeHtml(item.message)}</div>
+                    </div>
+                `;
+            }).join('') + '</div>';
+        }
+
+        function escapeHtml(value) {
+            return String(value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        document.getElementById('refreshBtn').addEventListener('click', renderMessages);
+
+        document.getElementById('clearBtn').addEventListener('click', async function() {
+            const { error } = await supabaseClient
+                .from('contact_messages')
+                .delete()
+                .neq('id', 0);
+
+            if (!error) {
+                renderMessages();
+            }
+        });
+
+        renderMessages();
+    </script>
+</body>
+</html>
